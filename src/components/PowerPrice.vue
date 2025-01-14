@@ -50,6 +50,9 @@ const chartOptions = {
     title: {
       display: true,
       text: "Electricity Prices (NOK per kWh)",
+      font: {
+        size: 30,
+      },
     },
   },
   scales: {
@@ -92,10 +95,24 @@ function updateChartData(prices) {
     ],
   };
 }
+
+const selectedRegion = ref("NO1");
+
+watch(selectedRegion, async (newRegion) => {
+  await store.fetchPrices(new Date(), newRegion);
+});
 </script>
 
 <template>
   <div>
+    <select v-model="selectedRegion" class="form-select mt-3">
+      <option selected value="NO1">Øst-Norge</option>
+      <option value="NO2">Sør-Norge</option>
+      <option value="NO3">Midt-Norge</option>
+      <option value="NO4">Nord-Norge</option>
+      <option value="NO5">Vest-Norge</option>
+    </select>
+
     <Line
       v-if="store.prices.length"
       :data="chartData"

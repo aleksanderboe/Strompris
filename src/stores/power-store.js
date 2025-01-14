@@ -18,17 +18,15 @@ export const usePowerStore = defineStore("power", () => {
     return Math.max(...prices.value.map((p) => p.NOK_per_kWh));
   });
 
-  async function fetchPrices(date = new Date()) {
+  async function fetchPrices(date = new Date(), region = "NO1") {
     loading.value = true;
     error.value = null;
-
     try {
       const year = date.getFullYear();
       const month = String(date.getMonth() + 1).padStart(2, "0");
       const day = String(date.getDate()).padStart(2, "0");
-      const priceArea = "NO1";
 
-      const url = `https://www.hvakosterstrommen.no/api/v1/prices/${year}/${month}-${day}_${priceArea}.json`;
+      const url = `https://www.hvakosterstrommen.no/api/v1/prices/${year}/${month}-${day}_${region}.json`;
 
       const response = await axios.get(url);
       prices.value = response.data.map((price) => ({
@@ -41,8 +39,6 @@ export const usePowerStore = defineStore("power", () => {
     } finally {
       loading.value = false;
     }
-
-    console.log(prices);
   }
 
   return {

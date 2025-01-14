@@ -8,13 +8,14 @@ import { usePowerStore } from "./stores/power-store";
 const store = usePowerStore();
 
 onMounted(() => {
-  console.log("mounted");
   store.fetchPrices();
 });
 </script>
 
 <template>
-  <PowerPrice></PowerPrice>
+  <div class="container">
+    <PowerPrice></PowerPrice>
+  </div>
 </template>
 
 <style scoped></style>
