@@ -14,10 +14,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <PowerPrice
-    :avgPrice="store.averagePrice"
-    :highestPrice="store.highestPrice"
-  ></PowerPrice>
+  <PowerPrice></PowerPrice>
 </template>
 
 <style scoped></style>
