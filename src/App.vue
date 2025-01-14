@@ -13,7 +13,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="container">
+  <div class="container shadow-sm rounded mt-2">
     <PowerPrice></PowerPrice>
   </div>
 </template>

@@ -87,8 +87,8 @@ function updateChartData(prices) {
       {
         label: "NOK per kWh",
         data: prices.map((price) => price.NOK_per_kWh),
-        borderColor: "rgba(75, 192, 192, 1)",
-        backgroundColor: "rgba(75, 192, 192, 0.2)",
+        borderColor: "rgba(255, 206, 86, 1)",
+        backgroundColor: "rgba(255, 206, 86, 0.2)",
         fill: true,
         tension: 0.4,
       },
@@ -97,21 +97,26 @@ function updateChartData(prices) {
 }
 
 const selectedRegion = ref("NO1");
+const selectedDate = ref(new Date().toISOString().split("T")[0]);
 
-watch(selectedRegion, async (newRegion) => {
-  await store.fetchPrices(new Date(), newRegion);
+watch([selectedRegion, selectedDate], async ([newRegion, newDate]) => {
+  await store.fetchPrices(new Date(newDate), newRegion);
 });
 </script>
 
 <template>
   <div>
-    <select v-model="selectedRegion" class="form-select mt-3">
-      <option selected value="NO1">Øst-Norge</option>
-      <option value="NO2">Sør-Norge</option>
-      <option value="NO3">Midt-Norge</option>
-      <option value="NO4">Nord-Norge</option>
-      <option value="NO5">Vest-Norge</option>
-    </select>
+    <div class="d-flex gap-3 pt-2">
+      <select v-model="selectedRegion" class="form-select">
+        <option value="NO1">Øst-Norge</option>
+        <option value="NO2">Sør-Norge</option>
+        <option value="NO3">Midt-Norge</option>
+        <option value="NO4">Nord-Norge</option>
+        <option value="NO5">Vest-Norge</option>
+      </select>
+
+      <input type="date" v-model="selectedDate" class="form-select" />
+    </div>
 
     <Line
       v-if="store.prices.length"
