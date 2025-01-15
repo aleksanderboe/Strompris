@@ -29,12 +29,14 @@ export const usePowerStore = defineStore("power", () => {
       const url = `https://www.hvakosterstrommen.no/api/v1/prices/${year}/${month}-${day}_${region}.json`;
 
       const response = await axios.get(url);
+
       prices.value = response.data.map((price) => ({
         ...price,
         time_start: new Date(price.time_start),
         time_end: new Date(price.time_end),
       }));
     } catch (e) {
+      prices.value = [];
       error.value = e.message;
     } finally {
       loading.value = false;
