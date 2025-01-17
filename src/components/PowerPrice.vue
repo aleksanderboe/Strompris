@@ -96,11 +96,18 @@ function updateChartData(prices) {
   };
 }
 
+const today = new Date().toISOString().split("T")[0];
+const minDate = "2021-12-01"; // api first record
+
 const selectedRegion = ref("NO1");
-const selectedDate = ref(new Date().toISOString().split("T")[0]);
+const selectedDate = ref(today);
 
 watch([selectedRegion, selectedDate], async ([newRegion, newDate]) => {
   await store.fetchPrices(new Date(newDate), newRegion);
+});
+
+onMounted(() => {
+  store.fetchPrices(new Date(), selectedRegion.value);
 });
 </script>
 
@@ -115,7 +122,13 @@ watch([selectedRegion, selectedDate], async ([newRegion, newDate]) => {
         <option value="NO5">Vest-Norge</option>
       </select>
 
-      <input type="date" v-model="selectedDate" class="form-select" />
+      <input
+        type="date"
+        v-model="selectedDate"
+        :max="today"
+        :min="minDate"
+        class="form-select"
+      />
     </div>
 
     <Line
