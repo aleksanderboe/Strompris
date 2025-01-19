@@ -4,6 +4,7 @@ import axios from "axios";
 
 export const usePowerStore = defineStore("power", () => {
   const prices = ref([]);
+  const rawPrices = ref();
   const loading = ref(false);
   const error = ref(null);
 
@@ -30,6 +31,8 @@ export const usePowerStore = defineStore("power", () => {
 
       const response = await axios.get(url);
 
+      rawPrices.value = response.data;
+
       prices.value = response.data.map((price) => ({
         ...price,
         time_start: new Date(price.time_start),
@@ -44,6 +47,7 @@ export const usePowerStore = defineStore("power", () => {
   }
 
   return {
+    rawPrices,
     prices,
     loading,
     error,

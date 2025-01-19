@@ -1,4 +1,6 @@
 <script setup>
+import { sendRequest } from "../services/openai";
+
 import { ref, watch, onMounted } from "vue";
 import { usePowerStore } from "../stores/power-store";
 import { Line } from "vue-chartjs";
