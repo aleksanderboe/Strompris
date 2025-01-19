@@ -25,13 +25,14 @@ def openai_request():
             messages=[
                 {
                     "role": "system",
-                    "content": "You are an assistant that provides concise answers to questions about power prices."
+                    "content": "You are an assistant that provides concise answers to questions about power prices. Avoid explanations and only give out the result straight"
                 },
                 {
                     "role": "user",
                     "content": enriched_message,
                 },
             ],
+            temperature=0.2,
         )
 
         reply = completion.choices[0].message.content
