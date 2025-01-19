@@ -18,8 +18,6 @@ def openai_request():
         user_message = data.get("message")
         prices = data.get("prices") 
         
-        print(prices)
-
         enriched_message = f"{user_message}\n\nCurrent power prices:\n{prices}"
 
         completion = client.chat.completions.create(
