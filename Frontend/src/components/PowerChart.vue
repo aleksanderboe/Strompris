@@ -29,19 +29,7 @@ ChartJS.register(
   Filler
 );
 
-const chartData = ref({
-  labels: [],
-  datasets: [
-    {
-      label: "NOK per kWh",
-      data: [],
-      borderColor: "rgba(255, 206, 86, 1)",
-      backgroundColor: "rgba(255, 206, 86, 0.2)",
-      fill: true,
-      tension: 0.4,
-    },
-  ],
-});
+const chartData = ref({});
 
 const chartOptions = {
   responsive: true,
