@@ -3,7 +3,6 @@
 import { ref, watch, onMounted } from "vue";
 import { usePowerStore } from "../stores/power-store";
 import PowerChart from "./PowerChart.vue";
-import PowerChat from "./PowerChat.vue";
 import PowerFilters from "./PowerFilters.vue";
 
 const store = usePowerStore();
@@ -33,6 +32,5 @@ onMounted(() => {
     />
 
     <PowerChart />
-    <PowerChat />
   </div>
 </template>
