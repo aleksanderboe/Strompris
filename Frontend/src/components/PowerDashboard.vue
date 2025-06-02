@@ -1,4 +1,3 @@
-// PowerDashboard.vue
 <script setup>
 import { ref, watch, onMounted } from "vue";
 import { usePowerStore } from "../stores/power-store";
@@ -31,6 +30,9 @@ onMounted(() => {
       :max-date="today"
     />
 
-    <PowerChart />
+    <PowerChart
+      :selected-region="selectedRegion"
+      :selected-date="selectedDate"
+    />
   </div>
 </template>
